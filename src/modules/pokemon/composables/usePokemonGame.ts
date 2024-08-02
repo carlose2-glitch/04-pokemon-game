@@ -1,11 +1,15 @@
 import { computed, onMounted, ref } from 'vue';
-import { GameStatus, type PokemonListResponse } from '../interfaces';
+import { GameStatus, type Pokemon, type PokemonListResponse } from '../interfaces';
 import { pokemonApi } from '../api/pokemonApi';
 
 export const usePokemonGame = () => {
   const gameStatus = ref<GameStatus>(GameStatus.Playing);
   const pokemons = ref<Pokemon[]>([]);
   const pokemonsOptions = ref<Pokemon[]>([]);
+
+  const randomPoquemon = computed(
+    () => pokemonsOptions.value[Math.floor(Math.random() * pokemonsOptions.value.length)],
+  );
 
   const isLoading = computed(() => pokemons.value.length === 0);
 
@@ -40,6 +44,7 @@ export const usePokemonGame = () => {
     gameStatus,
     isLoading,
     pokemonsOptions,
+    randomPoquemon,
     //Methods
     getNextOptions,
   };
