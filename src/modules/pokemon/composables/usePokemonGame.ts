@@ -19,13 +19,13 @@ export const usePokemonGame = () => {
 
     const pokemonsArray = response.data.results.map((pokemon) => {
       const urlParts = pokemon.url.split('/');
+
       const id = urlParts.at(-2) ?? 0;
       return {
         name: pokemon.name,
         id: +id,
       };
     });
-
     return pokemonsArray.sort(() => Math.random() - 0.5);
   };
 
@@ -36,6 +36,8 @@ export const usePokemonGame = () => {
   };
 
   const checkAnswer = (id: number) => {
+    console.log(randomPoquemon);
+    console.log(id);
     const hasWon = randomPoquemon.value.id === id;
 
     if (hasWon) {
@@ -53,7 +55,6 @@ export const usePokemonGame = () => {
   onMounted(async () => {
     pokemons.value = await getPokemons();
     getNextRound();
-    console.log(pokemonsOptions.value);
   });
 
   return {

@@ -32,7 +32,6 @@
       :correct-answer="randomPoquemon.id"
       @selected-option="checkAnswer"
     />
-    <!-- :block-selection="" -->
   </section>
 </template>
 
@@ -50,8 +49,4 @@ const {
   checkAnswer,
   getNextRound,
 } = usePokemonGame();
-
-const onSelectedOption = (value: number) => {
-  console.log(value);
-};
 </script>
