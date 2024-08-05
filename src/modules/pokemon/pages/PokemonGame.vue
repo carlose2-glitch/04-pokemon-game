@@ -9,7 +9,16 @@
 
   <section v-else class="flex flex-col justify-center items-center w-screen h-screen">
     <h1 class="m-5">¿Quien es este Pokémon?</h1>
-    <h3 class="capitalize">{{ gameStatus }}</h3>
+
+    <div class="h-20">
+      <button
+        v-if="gameStatus !== GameStatus.Playing"
+        @click="getNextRound(4)"
+        class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition-all"
+      >
+        ¿Jugar de nuevo?
+      </button>
+    </div>
 
     <!-- Pokemon Picture -->
     <PokemonPicture
@@ -39,6 +48,7 @@ const {
   gameStatus,
   pokemonsOptions: options,
   checkAnswer,
+  getNextRound,
 } = usePokemonGame();
 
 const onSelectedOption = (value: number) => {
