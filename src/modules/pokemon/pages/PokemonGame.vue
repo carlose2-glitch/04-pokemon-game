@@ -9,7 +9,7 @@
 
   <section v-else class="flex flex-col justify-center items-center w-screen h-screen">
     <h1 class="m-5">¿Quien es este Pokémon?</h1>
-    <h3>{{ randomPoquemon }}</h3>
+    <h3 class="capitalize">{{ gameStatus }}</h3>
 
     <!-- Pokemon Picture -->
     <PokemonPicture
@@ -17,7 +17,7 @@
       :show-pokemon="gameStatus !== GameStatus.Playing"
     />
     <!-- Pokemon Options -->
-    <PokemonOptions :options="options" @selected-option="onSelectedOption" />
+    <PokemonOptions :options="options" @selected-option="checkAnswer" />
   </section>
 </template>
 
@@ -27,7 +27,13 @@ import PokemonPicture from '../components/PokemonPicture.vue';
 import { usePokemonGame } from '../composables/usePokemonGame';
 import { GameStatus } from '../interfaces';
 
-const { randomPoquemon, isLoading, gameStatus, pokemonsOptions: options } = usePokemonGame();
+const {
+  randomPoquemon,
+  isLoading,
+  gameStatus,
+  pokemonsOptions: options,
+  checkAnswer,
+} = usePokemonGame();
 
 const onSelectedOption = (value: number) => {
   console.log(value);
